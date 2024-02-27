@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+
+    stages {
+        stage("Git checkout") {
+            steps {    
+            echo "Checking the Git Repo"
+            git url: "https://gitlab.com/test3065732/django-notes-app.git", branch: "main" 
+            }
+        }
+        
+        stage("Build") {
+            steps {
+            echo " Build the Image"
+            sh " docker build -t my-note-app ." 
+           }
+        }
+    }
+}
