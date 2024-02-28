@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-environment {
-        PATH = "/usr/local/bin:$PATH"
-        COMPOSE_VERSION = "2.24.6"  // Replace with the desired Docker Compose version
-        INSTALL_DIR = "${JENKINS_HOME}/tools/docker-compose"
-    }
-
     stages {
         stage("Git checkout") {
             steps {    
@@ -30,19 +24,7 @@ environment {
             }
          }
       }
-        stage("Install Docker Compose") {
-            steps {
-                script {
-                    sh """
-                        mkdir -p ${INSTALL_DIR}
-                        curl -L "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-\$(uname -s)-\$(uname -m)" -o ${INSTALL_DIR}/docker-compose
-                        chmod +x ${INSTALL_DIR}/docker-compose
-                        export PATH=${INSTALL_DIR}:$PATH
-                    """
-                }
-            }
-        }
-      stage("Deploy"){
+        stage("Deploy"){
           steps {
           echo "Deploying the Container"
           sh "docker-compose down && docker-compose up -d"
