@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+
+    stages {
+        stage ("Git clone") {
+           steps {
+           echo "Cloning the Git Repo" 
+           git url: "https://github.com/Ashu210980/Django-Notes-App.git", branch: "main" 
+           }
+        }
+    }
+}
