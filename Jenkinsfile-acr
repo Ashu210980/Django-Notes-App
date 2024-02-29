@@ -11,7 +11,7 @@ pipeline {
         stage("Build"){
            steps {
            echo "Building the Image"
-           sh "docker build -t my-note-app ." 
+           sh "docker build -t notesappacr.azurecr.io/my-note-app:latest ." 
            } 
         }
         stage("Azure login and Push to ACR"){
