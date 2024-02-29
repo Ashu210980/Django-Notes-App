@@ -16,7 +16,7 @@ pipeline {
         }
         stage("Azure login and Push to ACR"){
            steps {
-            echo echo "Azure login and Pushing the image to ACR"
+            echo "Azure login and Pushing the image to ACR"
             withCredentials([usernamePassword(credentialsId:"azure_acr_credentials",passwordVariable:"password",usernameVariable:"username")]){
             sh "docker login -u ${env.username} -p ${env.password} notesappacr.azurecr.io"
             sh "docker push notesappacr.azurecr.io/my-note-app:latest"
