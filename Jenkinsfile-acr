@@ -26,7 +26,7 @@ pipeline {
         stage('Deploy Web App'){
         steps{
             withCredentials([azureServicePrincipal("azureServicePrincipal")]) {
-            sh "az login --service-principal -u ${AZURE_CLIENT_ID} -p ${AZURE_CLIENT_SECRET} --tenant ${AZURE_TENANT_ID} --subscription ${AZURE_SUBSCRIPTION_ID}"
+            sh "az login --service-principal -u ${AZURE_CLIENT_ID} -p ${AZURE_CLIENT_SECRET} --tenant ${AZURE_TENANT_ID}"
             }
             withCredentials([usernamePassword(credentialsId:"azure_acr_credentials",passwordVariable:"password",usernameVariable:"username")]) {
             sh "az webapp config container set --name my-note-app --resource-group vcreatek --docker-custom-image-name notesappacr.azurecr.io/my-note-app:latest --docker-registry-server-url https://notesappacr.azurecr.io --docker-registry-server-user ${username} --docker-registry-server-password ${password}"
