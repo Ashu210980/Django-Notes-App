@@ -31,8 +31,8 @@ pipeline {
             withCredentials([usernamePassword(credentialsId:"azure_acr_credentials",passwordVariable:"password",usernameVariable:"username")]) {
             sh "az webapp config container set --name my-note-app --resource-group vcreatek --docker-custom-image-name notesappacr.azurecr.io/my-note-app:latest --docker-registry-server-url https://notesappacr.azurecr.io --docker-registry-server-user ${username} --docker-registry-server-password ${password}"
             }
-        }
-    }   
-       } 
+          }
+        }   
+      } 
     }
     
